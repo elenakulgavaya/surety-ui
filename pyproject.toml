@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "surety-ui"
+description = "Web UI testing library with Selenium integration for the Surety testing framework."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+authors = [
+    { name = "Elena Kulgavaya", email = "elena.kulgavaya@gmail.com" }
+]
+
+dynamic = ["version"]
+
+dependencies = [
+    "surety>=0.0.4,<1.0",
+    "surety-config>=0.0.3,<1.0",
+    "surety-diff>=0.0.1,<1.0",
+    "Pillow",
+    "pytest",
+    "selenium",
+    "waiting"
+]
+
+keywords = [
+    "testing",
+    "automation",
+    "selenium",
+    "web-testing",
+    "surety",
+    "ui-testing",
+    "qa",
+    "page-object-model"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["surety*"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"
