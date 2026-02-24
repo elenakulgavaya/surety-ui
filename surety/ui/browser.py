@@ -232,7 +232,10 @@ class Element:
     _width = None
 
     def __init__(self, by_value=None, by=None, # pylint: disable=invalid-name
-                 css=None, xpath=None, name=None):
+                 css=None, xpath=None, name=None, test_id=None):
+        if test_id:
+            by = By.CSS_SELECTOR
+            by_value = f'[data-testid="{test_id}"]'
         if css:
             by = By.CSS_SELECTOR
             by_value = css

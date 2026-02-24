@@ -7,6 +7,12 @@ from waiting import TimeoutExpired
 from surety.ui.browser import Element
 
 
+def test_element_initialization_with_data_test_id():
+    elem = Element(test_id='help button')
+    assert elem.by == By.CSS_SELECTOR
+    assert elem.by_value == '[data-testid="help button"]'
+
+
 def test_element_initialization_with_css():
     elem = Element(css='button.primary')
     assert elem.by == By.CSS_SELECTOR
