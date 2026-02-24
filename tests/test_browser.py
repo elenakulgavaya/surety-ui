@@ -1,51 +1,14 @@
-from unittest.mock import MagicMock, Mock
-
 import pytest
 
-from pathlib import Path
 from surety.ui.browser import Browser
 
-
-@pytest.fixture(autouse=True)
-def mock_chrome_driver(monkeypatch, reset_browser):
-    mock_driver = MagicMock()
-    mock_driver.set_page_load_timeout = Mock()
-    mock_driver.set_window_size = Mock()
-    mock_driver.get_log = Mock(return_value=[])
-    mock_driver.quit = Mock()
-    mock_driver.execute_script = Mock()
-    mock_driver.implicitly_wait = Mock()
-
-    return mock_driver
-
-
-@pytest.fixture(autouse=True)
-def mock_chrome_class(monkeypatch, mock_chrome_driver):
-    mock_chrome = Mock(return_value=mock_chrome_driver)
-    monkeypatch.setattr('surety.ui.browser.Chrome', mock_chrome)
-    return mock_chrome
-
-
-@pytest.fixture(autouse=True)
-def mock_cfg(monkeypatch):
-    mock_config = MagicMock()
-    mock_config.Browser.headless = False
-    mock_config.Browser.get = Mock(return_value=None)
-    monkeypatch.setattr('surety.ui.browser.Cfg', mock_config)
-
-    return mock_config
-
-
-@pytest.fixture(autouse=True)
-def mock_folder(monkeypatch):
-    mock_fold = MagicMock()
-    mock_path = MagicMock(spec=Path)
-    mock_path.absolute.return_value = Path('/mock/downloads')
-    mock_fold.generate_path = Mock(return_value=mock_path)
-    monkeypatch.setattr('surety.ui.browser.folder', mock_fold)
-
-    return mock_fold
-
+pytestmark = pytest.mark.usefixtures(
+    'reset_browser',
+    'mock_chrome_driver',
+    'mock_chrome_class',
+    'mock_cfg',
+    'mock_folder'
+)
 
 def test_browser_is_singleton():
     browser1 = Browser()

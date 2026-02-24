@@ -2,9 +2,9 @@ import base64
 
 import json
 
-from surety.diff import compare
 from selenium.common.exceptions import WebDriverException
 
+from surety.diff import compare
 from surety.ui.browser import Browser
 
 

@@ -6,6 +6,7 @@ from waiting import TimeoutExpired
 
 from surety.ui.browser import Element
 
+# pylint: disable=protected-access
 
 def test_element_initialization_with_data_test_id():
     elem = Element(test_id='help button')

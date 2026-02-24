@@ -2,6 +2,7 @@ import pytest
 
 from surety.ui.elements import Button, Checkbox
 
+# pylint: disable=protected-access
 
 def test_checkbox_state_changes(mock_web_element):
     checkbox = Checkbox(css='input[type="checkbox"]')
@@ -51,6 +52,6 @@ def testverify_checked_fails(mock_web_element):
         checkbox.verify_checked(True)
 
 
-def test_checkbox_inherits_from_button(mock_browser):
+def test_checkbox_inherits_from_button():
     checkbox = Checkbox(css='input[type=checkbox]')
     assert isinstance(checkbox, Button)

@@ -1,8 +1,6 @@
 import time
 import waiting
 
-from surety.config import Cfg
-from surety.diff import compare
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common import action_chains
 from selenium.common.exceptions import (
@@ -14,6 +12,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from waiting import wait, TimeoutExpired
 
+from surety.config import Cfg
+from surety.diff import compare
 from surety.ui import folder
 from surety.ui.screenshots import PageScreenshot
 from surety.ui.singleton import Singleton

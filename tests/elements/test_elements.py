@@ -5,6 +5,7 @@ from waiting import TimeoutExpired
 
 from surety.ui.browser import Element, Elements, retry_on_js_reload
 
+# pylint: disable=protected-access
 
 def test_elements_initialization_with_element_class():
     mock_element_class = MagicMock()

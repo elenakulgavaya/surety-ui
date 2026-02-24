@@ -1,9 +1,10 @@
-import pytest
-
 from unittest.mock import Mock, patch
+
+import pytest
 
 from surety.ui.elements import TextInput
 
+# pylint: disable=protected-access
 
 def test_input_with_clear(mock_web_element):
     text_input = TextInput(name='input')

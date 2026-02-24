@@ -1,10 +1,12 @@
+from unittest.mock import Mock, patch, PropertyMock
+
 import pytest
 
-from unittest.mock import Mock, patch, PropertyMock
 from selenium.common.exceptions import StaleElementReferenceException
 
 from surety.ui.elements import Label
 
+# pylint: disable=protected-access
 
 def test_label_text_property(mock_web_element):
     mock_web_element.text = 'Label Text'

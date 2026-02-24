@@ -1,10 +1,10 @@
 import os
 import shutil
 
-from surety.config import Cfg
 from PIL import Image, ImageDraw
 from waiting import wait
 
+from surety.config import Cfg
 from surety.ui import folder
 
 

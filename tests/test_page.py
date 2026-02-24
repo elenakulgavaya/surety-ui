@@ -1,14 +1,20 @@
-from unittest.mock import MagicMock, Mock, patch
-
 import pytest
 
-from pathlib import Path
+from unittest.mock import MagicMock, Mock, patch
 
 from selenium.webdriver import Keys
 
 from surety.ui.browser import Browser, Page
-from surety.ui.singleton import Singleton
 
+# pylint: disable=duplicate-code
+pytestmark = pytest.mark.usefixtures(
+    'reset_browser',
+    'mock_chrome_driver',
+    'mock_chrome_class',
+    'mock_cfg',
+    'mock_folder'
+)
+# pylint: enable=duplicate-code
 
 class TestPage(Page):
     base_url = 'https://example.com'
@@ -18,54 +24,6 @@ class TestPage(Page):
 class FormatPage(Page):
     base_url = 'https://example.com'
     url = 'users/{}/profile'
-
-
-@pytest.fixture(autouse=True)
-def reset_browser(monkeypatch):
-    if hasattr(Singleton, '_instances'):
-        Singleton._instances.clear()
-
-
-@pytest.fixture
-def mock_chrome_driver(monkeypatch):
-    mock_driver = MagicMock()
-    mock_driver.set_page_load_timeout = Mock()
-    mock_driver.set_window_size = Mock()
-    mock_driver.get_log = Mock(return_value=[])
-    mock_driver.quit = Mock()
-    mock_driver.execute_script = Mock()
-    mock_driver.implicitly_wait = Mock()
-
-    return mock_driver
-
-
-@pytest.fixture(autouse=True)
-def mock_chrome_class(monkeypatch, mock_chrome_driver):
-    mock_chrome = Mock(return_value=mock_chrome_driver)
-    monkeypatch.setattr('surety.ui.browser.Chrome', mock_chrome)
-    return mock_chrome
-
-
-@pytest.fixture(autouse=True)
-def mock_cfg(monkeypatch, reset_browser):
-    mock_config = MagicMock()
-    mock_config.Browser.headless = False
-    mock_config.Browser.get = Mock(return_value=None)
-    monkeypatch.setattr('surety.ui.browser.Cfg', mock_config)
-
-    return mock_config
-
-
-@pytest.fixture(autouse=True)
-def mock_folder(monkeypatch, reset_browser):
-    mock_fold = MagicMock()
-    mock_path = MagicMock(spec=Path)
-    mock_path.absolute.return_value = Path('/mock/downloads')
-    mock_fold.generate_path = Mock(return_value=mock_path)
-    monkeypatch.setattr('surety.ui.browser.folder', mock_fold)
-
-    return mock_fold
-
 
 
 def test_not_implemented_without_url():

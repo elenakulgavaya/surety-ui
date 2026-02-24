@@ -1,9 +1,10 @@
-import pytest
-
 from unittest.mock import Mock, patch
+
+import pytest
 
 from surety.ui.elements import Button
 
+# pylint: disable=protected-access
 
 def test_click_clears_target(mock_web_element):
     button = Button(css='button')

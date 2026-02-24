@@ -1,12 +1,11 @@
+from unittest.mock import MagicMock, Mock, PropertyMock
+
 import pytest
-from unittest.mock import MagicMock, Mock, patch, PropertyMock
-from selenium.common.exceptions import StaleElementReferenceException
 
-from surety.ui.elements import (
-    Button, Link, TextInput, Label, Select, Checkbox, Container, Table, TableRow
-)
-from surety.ui.browser import Element, Elements, retry_on_js_reload
+from surety.ui.elements import Select
 
+
+# pylint: disable=protected-access
 
 def test_select_located_property(mock_web_element, monkeypatch):
     mock_base_select = Mock()

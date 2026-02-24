@@ -3,6 +3,8 @@ from unittest.mock import patch
 from surety.ui.pytest_addons import compare_screenshot, compare_downloaded_img
 
 
+# pylint: disable=unused-argument
+
 @patch('surety.ui.pytest_addons.Cfg')
 @patch('surety.ui.pytest_addons.PageScreenshot')
 @patch('surety.ui.pytest_addons.Browser')
