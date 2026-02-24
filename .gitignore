@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# packaging fixes
+*/__init__.pyi
+
 # C extensions
 *.so
 

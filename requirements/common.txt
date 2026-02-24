@@ -1,0 +1,7 @@
+surety==0.0.4
+surety-config==0.0.3
+surety-diff==0.0.1
+Pillow==10.0.1
+pytest==8.3.4
+selenium==4.13.0
+waiting==1.5.0

@@ -1,0 +1,37 @@
+[MASTER]
+init-hook='import sys; sys.path.append("./src")'
+ignore=LICENSE,
+    pyproject.toml,
+    README.md,
+    pytest.ini,
+    setup.cfg,
+    requirements.txt,
+    test-report.xml
+ignore-paths=dist,
+    fild.egg-info
+
+py-version=3.7
+suggestion-mode=yes
+
+[MESSAGES CONTROL]
+disable=missing-function-docstring,
+        missing-class-docstring,
+        missing-module-docstring,
+        fixme
+
+[TYPECHECK]
+ignored-modules=surety
+
+[BASIC]
+good-names=i,
+           j,
+           k,
+           ex,
+           tz,
+           Run,
+           _
+
+[DESIGN]
+max-args=8
+min-public-methods=0
+max-public-methods=22
