@@ -213,7 +213,7 @@ def test_element_descriptor_sets_parent(mock_web_element):
         child = Element(css='.child')
 
     container = Container(css='.container')
-    container._fixed_target = mock_web_element
+    container._fixed_target = mock_web_element # pylint: disable=attribute-defined-outside-init
 
     descriptor = Container.__dict__['child']
     result = descriptor.__get__(container, Container) # pylint: disable=unnecessary-dunder-call

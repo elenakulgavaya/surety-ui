@@ -18,7 +18,7 @@ class Button(Element):
         return self.located.text
 
     def click(self):
-        self._target = None
+        self.invalidate()
         self.scroll_to()
         self.located.click()
         Browser().recreate_session()
@@ -159,7 +159,7 @@ class Select(Element):
 
     def wait_for_value(self):
         def wait_for_options():
-            self._target = None
+            self.invalidate()
             return self.located.options
 
         wait(
