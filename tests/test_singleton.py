@@ -1,5 +1,6 @@
 from surety.ui.singleton import Singleton
 
+# pylint: disable=undefined-variable
 
 def test_singleton_creates_single_instance():
     """Verify that a class using Singleton metaclass creates only one instance."""
