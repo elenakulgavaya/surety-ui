@@ -47,7 +47,7 @@ def test_click_and_switch_to_new_window(mock_web_element, mock_browser,
     mock_driver = mock_browser.return_value.driver
     mock_driver.window_handles = ['window1']
 
-    def side_effect_wait(func, **kwargs):
+    def side_effect_wait(_, **__):
         mock_driver.window_handles = ['window1', 'window2']
         return True
 

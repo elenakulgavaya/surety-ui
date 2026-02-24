@@ -105,9 +105,8 @@ def test_element_wait_for_not_present(mock_wait):
     mock_wait.assert_called_once()
 
 
-@patch('surety.ui.browser.wait')
 @patch('surety.ui.browser.Browser')
-def test_element_scroll_to(mock_browser, mock_wait, monkeypatch):
+def test_element_scroll_to(mock_browser):
     mock_driver = MagicMock()
     mock_driver.get_window_size.return_value = {'height': 1000}
     mock_browser.return_value.driver = mock_driver
@@ -147,7 +146,7 @@ def test_element_invalidate_without_parent():
 
 def test_element_get_multiple_attributes():
     mock_web = MagicMock()
-    mock_web.get_attribute.side_effect = lambda name: {
+    mock_web.get_attribute.side_effect = lambda name: { # pylint: disable=unnecessary-lambda
         'class': 'button-primary',
         'id': 'submit-btn',
         'disabled': None
@@ -217,7 +216,7 @@ def test_element_descriptor_sets_parent(mock_web_element):
     container._fixed_target = mock_web_element
 
     descriptor = Container.__dict__['child']
-    result = descriptor.__get__(container, Container)
+    result = descriptor.__get__(container, Container) # pylint: disable=unnecessary-dunder-call
     assert result is descriptor
     assert descriptor._parent is container
 
@@ -320,7 +319,7 @@ def test_wait_for_size_height_mismatch(mock_web_element):
 
     results = []
 
-    def fake_wait(fn, **kwargs):
+    def fake_wait(fn, **_):
         results.append(fn())  # call is_of_size directly
 
     with patch('surety.ui.browser.wait', fake_wait):
@@ -336,7 +335,7 @@ def test_wait_for_size_width_mismatch(mock_web_element):
 
     results = []
 
-    def fake_wait(fn, **kwargs):
+    def fake_wait(fn, **_):
         results.append(fn())
 
     with patch('surety.ui.browser.wait', fake_wait):
@@ -352,7 +351,7 @@ def test_wait_for_size_both_match_returns_true(mock_web_element):
 
     results = []
 
-    def fake_wait(fn, **kwargs):
+    def fake_wait(fn, **_):
         results.append(fn())
 
     with patch('surety.ui.browser.wait', fake_wait):
@@ -394,9 +393,10 @@ def test_element_hover(mock_driver, mock_web_element):
     el._fixed_target = mock_web_element
 
     mock_ac = MagicMock()
-    with patch('surety.ui.browser.ActionChains', return_value=mock_ac) as MockAC:
+    with patch('surety.ui.browser.ActionChains',
+               return_value=mock_ac) as action_chains:
         result = el.hover()
+        assert result is True
+        action_chains.assert_called_once_with(mock_driver)
 
-    assert result is True
-    MockAC.assert_called_once_with(mock_driver)
     mock_ac.move_to_element.assert_called_once_with(mock_web_element)

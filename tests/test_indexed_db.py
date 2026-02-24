@@ -1,8 +1,10 @@
+from unittest.mock import MagicMock
+
 import pytest
 
-from unittest.mock import MagicMock
 from surety.ui.indexed_db import IndexedDb
 
+# pylint: disable=redefined-outer-name
 
 @pytest.fixture
 def mock_browser(monkeypatch):

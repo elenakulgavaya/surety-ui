@@ -1,5 +1,5 @@
 from pathlib import Path
-from unittest.mock import patch, Mock, call
+from unittest.mock import patch, Mock
 from surety.ui.folder import (
     generate_path,
     generate_file_name,
@@ -7,6 +7,7 @@ from surety.ui.folder import (
     get_downloaded_file_with_wait
 )
 
+# pylint: disable=unused-argument
 
 @patch('surety.ui.folder.os.makedirs')
 @patch('surety.ui.folder.os.path.exists')

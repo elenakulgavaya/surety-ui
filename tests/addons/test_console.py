@@ -1,6 +1,6 @@
-import pytest
-
 from unittest.mock import patch
+
+import pytest
 
 from surety.ui.pytest_addons import get_console_errors, check_console_errors
 
@@ -109,7 +109,6 @@ def test_check_console_errors_preserves_function_metadata(mock_get_errors):
     @check_console_errors
     def test_func():
         """Test docstring"""
-        pass
 
     assert test_func.__name__ == 'test_func'
     assert test_func.__doc__ == 'Test docstring'

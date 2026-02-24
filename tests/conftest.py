@@ -1,11 +1,11 @@
 from unittest.mock import MagicMock, Mock
+from pathlib import Path
 
 import sys
 
 import pytest
 
-from pathlib import Path
-
+# pylint: disable=redefined-outer-name, unused-argument, protected-access
 
 mock_config = MagicMock()
 mock_config.Browser.headless = False
@@ -20,7 +20,7 @@ mock_config_module.Cfg = mock_config
 sys.modules['surety.config'] = mock_config_module
 sys.modules['surety.config.config'] = mock_config_module
 
-from surety.ui.singleton import Singleton
+from surety.ui.singleton import Singleton  # pylint: disable=wrong-import-position
 
 
 @pytest.fixture
@@ -68,4 +68,3 @@ def mock_folder(monkeypatch):
     monkeypatch.setattr('surety.ui.browser.folder', mock_fold)
 
     return mock_fold
-

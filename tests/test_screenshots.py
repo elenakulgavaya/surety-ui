@@ -1,9 +1,7 @@
-import os
-import shutil
-import pytest
-from pathlib import Path
 from unittest.mock import Mock, MagicMock, patch
 from PIL import Image
+
+import pytest
 
 from surety.ui.screenshots import (
     CompareBase,
@@ -12,6 +10,7 @@ from surety.ui.screenshots import (
     DownloadedImg,
 )
 
+# pylint: disable=redefined-outer-name, unused-argument
 
 @pytest.fixture
 def mock_cfg(monkeypatch):
@@ -251,7 +250,8 @@ def test_screenshot_compare_raises_when_expected_missing(mock_image_open, mock_g
 
 @patch('surety.ui.screenshots.Image.open')
 @patch('surety.ui.screenshots.folder.generate_file_path')
-def test_screenshot_compare_returns_mismatch_percentage(mock_generate_path, mock_image_open, mock_cfg):
+def test_screenshot_mismatch_percentage(mock_generate_path, mock_image_open,
+                                        mock_cfg):
     mock_generate_path.side_effect = [
         '/tmp/failed.png',
         '/tmp/threshold.png',

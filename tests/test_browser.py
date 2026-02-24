@@ -2,6 +2,8 @@ import pytest
 
 from surety.ui.browser import Browser
 
+# pylint: disable=protected-access
+
 pytestmark = pytest.mark.usefixtures(
     'reset_browser',
     'mock_chrome_driver',

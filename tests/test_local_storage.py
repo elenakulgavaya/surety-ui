@@ -1,12 +1,14 @@
 import base64
 import json
+from unittest.mock import MagicMock, patch
+
 import pytest
 
-from unittest.mock import MagicMock, patch
 from selenium.common import WebDriverException
 
 from surety.ui.local_storage import LocalStorage, Command
 
+# pylint: disable=redefined-outer-name
 
 @pytest.fixture
 def mock_browser(monkeypatch):

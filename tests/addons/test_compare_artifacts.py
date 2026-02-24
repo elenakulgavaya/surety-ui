@@ -68,7 +68,6 @@ def test_compare_screenshot_function_metadata(mock_browser,
     @compare_screenshot
     def test_func():
         """Test docstring"""
-        pass
 
     assert test_func.__name__ == 'test_func'
     assert test_func.__doc__ == 'Test docstring'

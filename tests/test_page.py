@@ -1,10 +1,13 @@
-import pytest
-
 from unittest.mock import MagicMock, Mock, patch
 
+import pytest
+
+from selenium.common import (
+    ElementClickInterceptedException, StaleElementReferenceException,
+)
 from selenium.webdriver import Keys
 
-from surety.ui.browser import Browser, Page
+from surety.ui.browser import Browser, Page, retry_on_js_reload
 
 # pylint: disable=duplicate-code
 pytestmark = pytest.mark.usefixtures(
@@ -253,16 +256,14 @@ def test_go_back():
 def test_press_key(mock_chrome_driver):
     mock_ac = MagicMock()
     with patch('surety.ui.browser.action_chains.ActionChains',
-               return_value=mock_ac) as MockAC:
+               return_value=mock_ac) as action_chains:
         Page.press_key(Keys.ENTER)
-        MockAC.assert_called_once_with(mock_chrome_driver)
+        action_chains.assert_called_once_with(mock_chrome_driver)
         mock_ac.send_keys.assert_called_once_with(Keys.ENTER)
         mock_ac.send_keys.return_value.perform.assert_called_once()
 
 
 def test_retry_on_js_reload_succeeds_first_try(monkeypatch):
-    from surety.ui.browser import retry_on_js_reload
-
     mock_function = Mock(return_value='success')
     mock_refresh = Mock()
     mock_wait = Mock()
@@ -276,9 +277,6 @@ def test_retry_on_js_reload_succeeds_first_try(monkeypatch):
 
 
 def test_retry_on_js_reload_handles_stale_element_exception(monkeypatch):
-    from surety.ui.browser import retry_on_js_reload
-    from selenium.common.exceptions import StaleElementReferenceException
-
     mock_function = Mock(side_effect=[
         StaleElementReferenceException('Element is stale'),
         'success'
@@ -295,9 +293,6 @@ def test_retry_on_js_reload_handles_stale_element_exception(monkeypatch):
 
 
 def test_retry_on_js_reload_handles_element_click_intercepted(monkeypatch):
-    from surety.ui.browser import retry_on_js_reload
-    from selenium.common.exceptions import ElementClickInterceptedException
-
     mock_function = Mock(side_effect=[
         ElementClickInterceptedException('Click intercepted'),
         'success'
@@ -324,12 +319,12 @@ def test_wait_for_window_closed(mock_chrome_driver):
 
 def test_wait_for_window_closed_lambda_one_handle(mock_chrome_driver):
     mock_chrome_driver.window_handles = ['only_one']
-    assert (lambda: len(mock_chrome_driver.window_handles) == 1)() is True
+    assert len(mock_chrome_driver.window_handles) == 1
 
 
 def test_wait_for_window_closed_lambda_multiple_handles(mock_chrome_driver):
     mock_chrome_driver.window_handles = ['h1', 'h2']
-    assert (lambda: len(mock_chrome_driver.window_handles) == 1)() is False
+    assert  len(mock_chrome_driver.window_handles) != 1
 
 
 def test_switch_to_default_window(mock_chrome_driver):

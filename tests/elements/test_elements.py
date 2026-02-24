@@ -48,12 +48,14 @@ def test_retry_on_stale_element(monkeypatch):
 
     mock_refresh = Mock()
 
-    def wait_impl(action, **kwargs):
+    def wait_impl(action, **_):
         # run until action returns truthy
         for _ in range(5):
             result = action()
             if result:
                 return result
+
+        return None
 
     monkeypatch.setattr('surety.ui.browser.waiting.wait', wait_impl)
 

@@ -1,9 +1,8 @@
+from unittest.mock import Mock, patch
+
 import pytest
-from unittest.mock import Mock, patch, MagicMock
-from surety.ui.elements import Button
 
-
-# conftest.py
+# pylint: disable=redefined-outer-name
 
 @pytest.fixture
 def mock_web_element():

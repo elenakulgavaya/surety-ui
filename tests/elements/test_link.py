@@ -1,5 +1,6 @@
 from surety.ui.elements import Button, Link
 
+# pylint: disable=protected-access
 
 def test_link_url_property(mock_web_element):
     mock_web_element.get_attribute.return_value = 'https://example.com'

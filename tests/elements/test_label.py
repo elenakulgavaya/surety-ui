@@ -50,7 +50,7 @@ def test_label_wait_for_text_match(mock_web_element, monkeypatch):
     mock_wait.assert_called_once()
 
 
-def test_label_wait_for_updated(mock_web_element, monkeypatch):
+def test_label_wait_for_updated(mock_web_element):
     type(mock_web_element).text = PropertyMock(side_effect=[
         'initial',
         'new'
@@ -90,7 +90,7 @@ def test_wait_for_text_handles_stale_exception(mock_web_element, monkeypatch):
     label._fixed_target = mock_web_element
     label.invalidate = Mock()
 
-    def wait_impl(func, **kwargs):
+    def wait_impl(func, **_):
         func()  # raises StaleElementReferenceException -> calls invalidate()
         func()  # returns True
 
