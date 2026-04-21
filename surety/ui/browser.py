@@ -439,8 +439,9 @@ class Element:
 
 class Elements(Element):
     def __init__(self, by_value=None, by=None, css=None, xpath=None,
-                 element_class=None):
-        super().__init__(by_value=by_value, by=by, css=css, xpath=xpath)
+                 element_class=None, test_id=None):
+        super().__init__(by_value=by_value, by=by, css=css, xpath=xpath,
+                         test_id=test_id)
         self.element_class = element_class
 
     @property
@@ -575,6 +576,7 @@ class Elements(Element):
              waiting_for=f'{count} items with labels')
 
     def verify_labels(self, expected):
+        self.wait_for_items_load(len(expected))
         compare(
             expected=expected,
             actual=self.get_labels(),
