@@ -346,6 +346,9 @@ class Element:
         except TimeoutExpired:
             return False
 
+    def is_displayed(self):
+        return self.located.is_displayed()
+
     def is_present(self, timeout=0):
         def wait_for_is_displayed():
             Browser().recreate_session()

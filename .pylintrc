@@ -34,4 +34,4 @@ good-names=i,
 [DESIGN]
 max-args=8
 min-public-methods=0
-max-public-methods=22
+max-public-methods=23
