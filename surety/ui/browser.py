@@ -293,6 +293,9 @@ class Element:
     @property
     def located(self):
         if self._fixed_target is not None:
+            if isinstance(self._fixed_target, Element):
+                return self._fixed_target.located
+
             return self._fixed_target
 
         self.check_browser_session()
@@ -345,9 +348,6 @@ class Element:
             return True
         except TimeoutExpired:
             return False
-
-    def is_displayed(self):
-        return self.located.is_displayed()
 
     def is_present(self, timeout=0):
         def wait_for_is_displayed():

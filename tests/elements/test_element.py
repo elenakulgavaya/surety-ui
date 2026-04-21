@@ -71,6 +71,16 @@ def test_element_text_property():
     assert elem.text == 'Button Text'
 
 
+def test_element_fixed_target_size_property():
+    mock_web_element = MagicMock()
+    mock_web_element.size = (1, 2)
+    button = Element()
+    button._fixed_target = mock_web_element
+    elem = Element.set_located(button)
+
+    assert elem.size == (1, 2)
+
+
 def test_element_check_browser_session_different(monkeypatch):
     mock_browser = MagicMock()
     mock_browser.session = 2
@@ -241,12 +251,6 @@ def test_element_is_not_present_returns_false_on_timeout(mock_web_element):
     with patch('surety.ui.browser.wait',
                Mock(side_effect=TimeoutExpired('', 1))):
         assert el.is_not_present(timeout_seconds=1) is False
-
-
-def test_element_is_displayed(mock_web_element):
-    el = Element(css='div')
-    el._fixed_target = mock_web_element
-    assert el.is_displayed()
 
 
 def test_element_is_present_false_on_exception(mock_web_element):
