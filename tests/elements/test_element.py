@@ -71,14 +71,14 @@ def test_element_text_property():
     assert elem.text == 'Button Text'
 
 
-def test_element_fixed_target_text_property():
+def test_element_fixed_target_size_property():
     mock_web_element = MagicMock()
-    mock_web_element.text = 'Button Text'
+    mock_web_element.size = (1, 2)
     button = Element()
     button._fixed_target = mock_web_element
-    elem = Element.set_located(mock_web_element)
+    elem = Element.set_located(button)
 
-    assert elem.text == 'Button Text'
+    assert elem.size == (1, 2)
 
 
 def test_element_check_browser_session_different(monkeypatch):
