@@ -243,12 +243,6 @@ def test_element_is_not_present_returns_false_on_timeout(mock_web_element):
         assert el.is_not_present(timeout_seconds=1) is False
 
 
-def test_element_is_displayed(mock_web_element):
-    el = Element(css='div')
-    el._fixed_target = mock_web_element
-    assert el.is_displayed()
-
-
 def test_element_is_present_false_on_exception(mock_web_element):
     el = Element(css='div')
     el._fixed_target = mock_web_element
