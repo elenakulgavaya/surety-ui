@@ -13,6 +13,7 @@ A comprehensive Python library for testing web applications with Selenium integr
 
 This library is designed to be used alongside `surety-api`, `surety-config`, and `surety-diff` as part of the complete Surety testing suite.
 
+
 ## Getting Started
 
 ### Installation
