@@ -83,8 +83,11 @@ class Command:
                 let db = event.target.result;
                 let transaction = db.transaction("{1}", "readwrite");
                 let store = transaction.objectStore("{1}");
-                let insertRequest = store.add({2});
-                
+                let data = {2};                                                                             
+                let insertRequest = store.keyPath
+                  ? store.add(data)               // inline key — IDB reads it from the object            
+                  : store.add(data, data.id);     // out-of-line key — must be passed explicitly 
+
                 insertRequest.onsuccess = function() {{
                     resolve("Insertion successful");
                 }};
