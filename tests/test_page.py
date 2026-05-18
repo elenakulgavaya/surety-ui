@@ -5,7 +5,7 @@ import pytest
 from selenium.common import (
     ElementClickInterceptedException, StaleElementReferenceException,
 )
-from selenium.webdriver import Keys
+from selenium.webdriver.common.keys import Keys
 
 from surety.ui.browser import Browser, Page, retry_on_js_reload
 
