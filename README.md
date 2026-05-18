@@ -1,3 +1,11 @@
+[![PyPI version](https://img.shields.io/pypi/v/surety-ui.svg)](https://pypi.org/project/surety-ui/)
+[![Python versions](https://img.shields.io/pypi/pyversions/surety-ui.svg)](https://pypi.org/project/surety-ui/)
+[![Downloads](https://img.shields.io/pypi/dm/surety-ui.svg)](https://pypi.org/project/surety-ui/)
+[![Tests](https://github.com/elenakulgavaya/surety-ui/actions/workflows/test.yml/badge.svg)](https://github.com/elenakulgavaya/surety-ui/actions?query=workflow%3ATests+branch%3Amain++)
+[![License](https://img.shields.io/pypi/l/surety-ui.svg)](https://github.com/elenakulgavaya/surety-ui/blob/main/LICENSE)
+
+------
+
 # surety-ui
 
 A comprehensive Python library for testing web applications with Selenium integration and test utilities. Part of the **Surety** testing framework family.
