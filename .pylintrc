@@ -35,3 +35,4 @@ max-args=8
 max-positional-args=7
 min-public-methods=0
 max-public-methods=23
+max-positional-arguments=14
