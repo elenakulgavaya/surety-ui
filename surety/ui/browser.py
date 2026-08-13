@@ -534,9 +534,9 @@ class Elements(Element):
     def wait_for_item_with_text_to_load(self, item_text, timeout_seconds=2):
         def wait_by_text():
             Browser().recreate_session()
-            return self.get_by_text(text=item_text) is not None
+            return self.get_by_text(text=item_text)
 
-        wait(wait_by_text,
+        return wait(wait_by_text,
              timeout_seconds=timeout_seconds,
              waiting_for=f'{item_text} in items')
 
