@@ -531,6 +531,15 @@ class Elements(Element):
             refresh=Browser.recreate_session
         )
 
+    def wait_for_specific_item_to_load(self, item_text, timeout_seconds=2):
+        def wait_by_text():
+            Browser().recreate_session()
+            return self.get_by_text(text=item_text) is not None
+
+        wait(wait_by_text,
+             timeout_seconds=timeout_seconds,
+             waiting_for=f'{item_text} in items')
+
     def wait_for_items_load(self, items_count, timeout_seconds=2):
         def check_count():
             if not items_count:
