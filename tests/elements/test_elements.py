@@ -190,6 +190,14 @@ def test_elements_wait_for_labels(mock_web_element):
     els.wait_for_labels(count=1, timeout_seconds=3)
 
 
+def test_elements_wait_for_item_with_text(mock_web_element):
+    mock_web_element.text = 'test'
+
+    els = Elements(css='div')
+    els._fixed_target = [mock_web_element]
+    els.wait_for_item_with_text_to_load(item_text='test', timeout_seconds=3)
+
+
 def test_elements_verify_labels(mock_web_element):
     mock_web_element.text = 'X'
     els = Elements(css='div')
